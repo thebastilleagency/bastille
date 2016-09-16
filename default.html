@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <title>{{site.title}}</title>
+
+    <meta name="author" content="">
+    <meta name="description" content="">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script type="text/javascript" src="javascripts/vendor/jquery.js"></script>
+    <script type="text/javascript" src="javascripts/vendor/modernizr.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="javascripts/venodr/respond.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="javascripts/scripts.js"></script>
+
+    <!-- Iconified with a little help from iconifer: http://iconifier.net/ -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="images/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-touch-icon-152x152.png" />
+  </head>
+  <body data-mod-border-style>
+    <div id="loader"></div>
+    <div class="mod-nav" data-mod-nav-style="">
+      <div class="mod-logo-fixed mod-nav-logo" data-mod-nav-go-to="#home"></div>
+      <div class="mod-nav-toggle" data-mod-nav-toggle></div>
+      <div class="mod-nav-menu">
+        <ul class="mod-nav-menu-items">
+          {% for page in site.pages %}
+            {% assign slug = page.title | downcase | replace: ' ', '-' %}
+            {% if slug == 'case-studies' %}
+              {% for post in page.posts %}
+                {% assign post_slug = post.title | downcase | replace: ' ', '-' %}
+                <li data-mod-nav-go-to="#{{post_slug}}" class="item-{{post_slug}}"><span>{{post.title}}</span></li>
+              {% endfor %}
+            {% else %}
+              <li data-mod-nav-go-to="#{{slug}}" class="item-{{slug}}"><span>{{page.title}}</span></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div id="wrapper">
+
+      {% for page in site.pages %}
+
+        {% assign slug = page.title | downcase | replace: ' ', '-' %}
+
+        {% if slug == 'home' %}
+
+          <div id="home" data-style="home" data-color="#0055FF" class="site-page site-home">
+            <a href="/" class="mod-logo-fixed" data-mod-nav-go-to="#home"></a>
+            <div class="mod-logo-tag">Bastille</div>
+
+            <video autoplay loop poster="{{page.meta['poster']}}" class="video-background">
+              <source src="{{page.meta['video_webm']}}" type="video/webm" />
+              <source src="{{page.meta['video_mp4']}}" type="video/mp4" />
+              <source src="{{page.meta['video_ogg']}}" type="video/ogg" />
+            </video>
+
+            <div class="site-border"></div>
+            <div class="page">
+              <div class="body">
+                <div class="head">
+                  <a href="/" class="mod-logo">
+                    <img src="images/logoBastille@2x.png" alt="Bastille Logo" height="180" width="100" class="img">
+                  </a>
+                  <h1>{{page.meta['heading']}} <a href="#" class="cta-about" data-mod-nav-go-to="#about-us">Bastille can help <span class="mod-down-arrow"></span></a></h1>
+                </div>
+              </div>
+
+              <div class="contact">
+                <p><a href="mailto:{{site.meta['email']}}">{{site.meta['email']}}</a></p>
+                <p><a href="tel:{{site.meta['phone']}}">{{site.meta['phone']}}</a></p>
+              </div>
+            </div>
+          </div>
+
+        {% elsif slug == 'about-us' %}
+
+          <div id="about-us" data-style="about-us" data-color="#000000" class="site-page site-about-us">
+            <div class="site-border"></div>
+            <div class="page">
+              <div class="body">
+                <div class="main">
+                  <h2>{{page.meta['title']}}</h2>
+                  <div class="row">
+                    <div class="col desk-span5of8">
+                      {{page.body}}
+                    </div>
+
+                    <div class="col desk-span3of8">
+                      {% for page in site.pages %}
+                        {% assign slug = page.title | downcase | replace: ' ', '-' %}
+                        {% if slug == 'case-studies' %}
+                          {% for post in page.posts %}
+                            {% assign post_slug = post.title | downcase | replace: ' ', '-' %}
+                            <div class="cta-about" data-mod-nav-go-to="#{{post_slug}}">
+                              <img src="{{post.meta['cta-about-image']}}" alt="{{post.meta['cta-about-alt']}}">
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        {% elsif slug == 'services' %}
+
+          <div id="services" data-style="services" data-color="#ffffff" class="site-page site-services">
+            <div class="mod-logo-tag">services</div>
+            <div class="site-border"></div>
+            <div class="page">
+              <div class="body">
+                <div class="main">
+                  <h2 class="heading">{{page.title}}</h2>
+                  <div class="mod-content-narrow">
+                    {{page.body}}
+                  </div>
+
+                  <div class="choose">
+                    <h2>which one is right<br>for you?</h2>
+                    <img src="images/servicesChoose.png" height="93" alt="Choose">
+                  </div>
+
+                  <div class="row">
+                    {% for post in page.posts limit:1 offset:0 %}
+                      <div class="choose-option choose-option-one">
+                        <h3>{{post.title}}</h3>
+
+                        <p>{{post.meta['text']}}</p>
+
+                        {{post.body}}
+                      </div>
+                    {% endfor %}
+
+                    <div class="choose-option-or">
+                      <p>or</p>
+                    </div>
+
+                    {% for post in page.posts limit:1 offset:1 %}
+                      <div class="choose-option choose-option-two">
+                        <h3>{{post.title}}</h3>
+
+                        <p>{{post.meta['text']}}</p>
+
+                        {{post.body}}
+                      </div>
+                    {% endfor %}
+                  </div>
+
+                  <div class="choose-cta-heading">
+                    <h2>{{page.meta['cta_heading']}}</h2>
+                  </div>
+
+                  <div class="choose-cta row">
+                    <div class="choose-cta-option">
+                      <a href="{{page.meta['cta_one_link']}}">{{page.meta['cta_one_button']}}</a>
+                    </div>
+
+                    <div class="choose-cta-option">
+                      <a href="{{page.meta['cta_two_link']}}">{{page.meta['cta_two_button']}}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        {% elsif slug == 'case-studies' %}
+
+          {% for post in page.posts %}
+
+            <div id="{{post.title | downcase | replace: ' ', '-' }}" data-style="case-study" data-color="{{post.meta['border-color']}}" class="site-page site-case-study">
+              <div class="site-border"></div>
+              <div class="page">
+                <div class="body">
+                  <div class="head" style="background-image: url({{post.meta['background-image']}})">
+                    <div class="head-content">
+                      <h2>Case Study</h2>
+
+                      <img src="{{post.meta['logo']}}" alt="{{post.title}} Logo" height="100" class="img">
+
+                      <hr>
+
+                      {{post.body}}
+                    </div>
+                  </div>
+
+                  <div class="main">
+                    <div class="main-content row">
+                      <div class="col span1of1 desk-span4of10">
+                        <h3>What we did</h3>
+
+                        <p>{{post.meta['work']}}</p>
+                      </div>
+
+                      <div class="col span1of1 desk-span2of10">&nbsp;</div>
+
+                      <div class="col span1of1 desk-span4of10">
+                        <h3>Results</h3>
+
+                        <p>{{post.meta['results']}}</p>
+
+                        <div class="mod-author">
+                          <img src="{{post.meta['results_avatar']}}" alt="{{post.meta['results_avatar_name']}}" height="60" class="img">
+                          <div class="bd">
+                            <h4>{{post.meta['results_avatar_name']}}</h4>
+                            <p>{{post.meta['results_avatar_job_title']}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          {% endfor %}
+
+        {% elsif slug == 'manifesto' %}
+
+          <div id="manifesto" data-style="team" data-color="#0055FF" class="site-page site-team">
+            <div class="site-border"></div>
+            <div class="page">
+              <div class="body">
+                <div class="main">
+                  <div class="row">
+                    <hr>
+
+                    <h2>{{page.meta['heading']}}</h2>
+
+                    <div class="cinema-col span1of1 cinema-span5of12">
+                      <h3>{{page.meta['sub_heading']}}</h3>
+                    </div>
+
+                    <hr>
+
+                    <div class="content col span1of1 cinema-span7of12">
+                      {{page.body}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        {% elsif slug == 'contact-us' %}
+
+          <div id="contact-us" data-style="contact-us" data-color="#ffffff" class="site-page site-contact-us" style="background-image: url()">
+            <div class="site-border"></div>
+            <div class="mod-logo-tag">contact us</div>
+            <div class="page">
+              <div class="body">
+                <div class="main">
+                  <div class="main-content row">
+
+                    <div class="col spacer span1of1 desk-span1of12">&nbsp;</div>
+
+                    <div class="col span1of1 desk-span8of12">
+                      <div class="lead">{{page.body}}</div>
+
+                      <div class="primary">
+                        <p><span class="heading">Phone</span><a href="tel:{{site.meta['phone']}}">{{site.meta['phone']}}</a></p>
+                        <p><span class="heading">Email</span><a href="mailto:{{site.meta['email']}}" class="email">{{site.meta['email']}}</a></p>
+                      </div>
+                    </div>
+
+                    <div class="col span1of1 desk-span3of12">
+                      <div class="secondary">
+                        <p><span class="heading">Our headquarters<br>are located at</span><br><span class="link">{{page.meta['address']}}</span></p>
+                      </div>
+
+                      <div class="tertiary">
+                        <p><span class="heading">Twitter</span><a href="{{page.meta['twitter_url']}}" target="_blank">{{page.meta['twitter_handle']}}</a></p>
+                        <p><span class="heading">Linkedin</span><a href="{{page.meta['linkedin_url']}}" target="_blank">{{page.meta['linkedin_handle']}}</a></p>
+                        <p><span class="heading">Blog</span><a href="{{page.meta['blog_url']}}" target="_blank">{{page.meta['blog_handle']}}</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="secondary">
+                  <p><span class="heading">Our headquarters<br>are located at</span><br><span class="link">{{page.meta['address']}}</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        {% endif %}
+
+      {% endfor %}
+
+      <div id="footer" class="layout-footer"></div>
+    </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', '{{site.meta['ga_code']}}', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
